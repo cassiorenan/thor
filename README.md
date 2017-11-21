@@ -37,4 +37,4 @@ Example (Windows)
 	
 Example (*nix)
 
-    cat examples\example01.cppt | thor | lua | g++ -c -o person.o -xc++ -
+    cat examples/example01.cppt | thor | lua | g++ -c -o person.o -xc++ -
