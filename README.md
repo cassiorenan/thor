@@ -25,3 +25,16 @@ Example:
 
 Thor is meant to be as generic as possible. But, for now, it spits
 out the compiled template as a [lua](http://www.lua.org) script.
+
+## Using the examples
+
+You can simply pipe the examples through thor, then through lua.
+The generated code should be ready to compile:
+
+Example (Windows)
+
+    type examples\example01.cppt | thor | lua | g++ -c -o person.o -xc++ -
+	
+Example (*nix)
+
+    cat examples\example01.cppt | thor | lua | g++ -c -o person.o -xc++ -

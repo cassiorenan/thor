@@ -10,11 +10,13 @@ int main() {
     auto mode = 's';
     while(it != end) {
         std::stringstream ss;
+		bool empty = true;
         switch(mode) {
         case 's':
             while (mode == 's' && it != end) {
                 while (it != end && *it != '<') {
                     ss << *it++;
+					empty = false;
                 }
                 if (it != end) {
                     ++it;
@@ -33,10 +35,12 @@ int main() {
                     }
                 }
             }
-            std::cout << "io.write([====[";
-            std::cout << ss.rdbuf();
-            ss.str("");
-            std::cout << "]====])\n";
+            if (!empty) {
+                std::cout << "io.write([====[";
+                std::cout << ss.rdbuf();
+                ss.str("");
+                std::cout << "]====])\n";
+            }
             break;
         case 'c':
             while (mode == 'c' && it != end) {

@@ -1,0 +1,28 @@
+<%-
+-- Usually this metadata should be provided in some other way to the lua script.
+-- For brevity, we're providing it inside the template itself.
+class = {
+	name = "Person",
+	attributes = {
+		name = {type="std::string"},
+		age = {type="int"}
+	}
+}
+%>
+
+<%-
+-- This template generates a C++ class with getters and setters for its members
+-- To use it, simply run the generated lua script using any lua interpreter.
+%>
+#include <string>
+
+class <%= class.name %> {
+	<%-for name,field in pairs(class.attributes) do%>
+	    <%= field.type %> <%= name %>;
+	<%-end%>
+public:
+    <%-for name,field in pairs(class.attributes) do%>
+	    <%=field.type%> get_<%=name%>() const {return <%= name%>;}
+		void set_<%=name%>(<%= field.type%> value) {<%= name%> = value;}
+	<%-end%>
+};
