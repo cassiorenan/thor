@@ -1,0 +1,24 @@
+#ifndef <%=header_guard%>
+#define <%=header_guard%>
+
+#include <utility> // for std::move
+
+<%processDependencies(class.attributes)%>
+
+// Generated dependencies
+<%for dependency in pairs(stdlib_dependencies) do%>
+#include <<%=dependency%>>
+<%end%>
+
+class <%= class.name %> {
+    <%for name,field in pairs(class.attributes) do%>
+    <%= field.type %> <%= name %>;
+    <%end%>
+public:
+    <%for name,field in pairs(class.attributes) do%>
+    <%=field.type%> get_<%=name%>() const {return <%= name%>;}
+    void set_<%=name%>(<%= field.type%> value) {this-><%= name%> = std::move(value);}
+    <%end%>
+};
+
+#endif

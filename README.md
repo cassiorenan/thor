@@ -13,7 +13,7 @@ Example:
 
 ## Compiling Thor
 
-Thor is written in a single `.cpp` file, inside `src` folder.
+Thor is written in a single `.cpp` file, inside the `src` folder.
 It requires C++14. To compile thor, just feed the cpp file to
 your C++14 compiler of choice.
 
