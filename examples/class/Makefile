@@ -1,4 +1,6 @@
 
+include ../../SETTINGS
+
 # For windows, "cat" needs to be replaced with "type"
 CAT = type
 
@@ -6,10 +8,13 @@ THOR = thor
 
 LUA = lua
 
-CXX = g++
-CXX_FLAGS = -O2
+CXX_FLAGS = $(CXX_EXAMPLE_FLAGS)
 
-example: main.o
+ifeq ($(PLATFORM), windows)
+example.exe: main.o
+else
+example: check_platform main.o
+endif
 	$(CXX) $(CXX_FLAGS) main.o -o example
 
 .SILENT: main.o
@@ -25,8 +30,13 @@ class.gen: class.cppt
 	@$(CAT) class.cppt | $(THOR) > class.gen
 	@echo Ok!
 
+ifeq ($(PLATFORM), windows)
+run: example.exe
+	@example
+else
 run: example
 	@./example
+endif
 
 clean:
 	-@rm example.exe class.gen person.hpp main.o
@@ -34,3 +44,5 @@ clean:
 
 # Do not remove this line!
 .DELETE_ON_ERROR:
+
+include ../../settings_validators.mk

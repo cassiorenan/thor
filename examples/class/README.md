@@ -3,7 +3,8 @@
 Not to be mistaken for an actual C++ template :)
 
 This example demonstrates a template to generate basic classes.
-The classes are generated according to metadata defined in `data.lua`.
+A "Person" class is generated according to metadata defined in `person.lua`.
+Then, it is used to store and display some data by `main.cpp`.
 
 Check the makefile to understand the basic flow.
 
