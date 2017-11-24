@@ -11,8 +11,11 @@ endif
 
 build:
 	@mkdir build
-
-install: check_platform check_install_path
+ifeq ($(PLATFORM),windows)
+install: build/thor.exe check_install_path
+else
+install: check_platform build/thor check_install_path
+endif
 	@echo Installing...
 ifeq ($(PLATFORM),windows)
 	@copy build\thor.exe $(INSTALL_PATH) > NUL

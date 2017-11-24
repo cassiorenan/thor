@@ -92,27 +92,33 @@ mode write_mode(IN& begin, const IN& end, OUT& out, char trim) {
 	return next_mode;
 }
 
+template<typename IN, typename OUT>
+void compile(IN& it, const IN& end, OUT& out) {
+	mode current_mode{mode::plain};
+    
+	while(it != end) {
+        switch(current_mode) {
+        case mode::plain:
+		    current_mode = write_mode<mode::plain>(it, end, out, 0);
+            break;
+        case mode::code:
+		    current_mode = write_mode<mode::code>(it, end, out, 0);
+            break;
+        case mode::getter:
+		    current_mode = write_mode<mode::getter>(it, end, out, ' ');
+            break;
+        default:
+            throw std::domain_error("Invalid mode.");
+        }
+    }
+}
+
 int main() {
 	std::ios::sync_with_stdio(false);
 	cin.tie(nullptr);
     
 	input_iterator it{cin};
 	output_iterator out{cout};
-    mode current_mode{mode::plain};
-    
-	while(it != end_it) {
-        switch(current_mode) {
-        case mode::plain:
-		    current_mode = write_mode<mode::plain>(it, end_it, out, 0);
-            break;
-        case mode::code:
-		    current_mode = write_mode<mode::code>(it, end_it, out, 0);
-            break;
-        case mode::getter:
-		    current_mode = write_mode<mode::getter>(it, end_it, out, ' ');
-            break;
-        default:
-            throw std::domain_error("Invalid mode.");
-        }
-    }
+	
+	compile(it, end_it, out);
 }
