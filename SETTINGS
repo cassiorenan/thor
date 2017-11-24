@@ -1,0 +1,10 @@
+# Compiler and flags. The Defaults are fine.
+CXX = g++
+CXX_FLAGS = -fno-rtti -O2 -Wall -std=c++14
+
+# Possible values are linux, windows, solaris, apple
+# Currently, only the "windows" value has any effect on the making process.
+# Any other value (Even if not on this list) will "just work".
+PLATFORM = windows
+
+INSTALL_PATH = C:\bin\cmd

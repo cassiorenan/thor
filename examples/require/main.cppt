@@ -2,6 +2,6 @@
 
 int main() {
 	<%for k,v in ipairs(test_values) do%>
-        std::cout << <%=escape(v)%>;	
+        std::cout << <%=escape(v)%> << '\n';	
 	<%end%>
 }

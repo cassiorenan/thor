@@ -11,30 +11,41 @@ Example:
 
     cat somefile.template | thor
 
+## Requirements
+
+To build `thor`, you only need a working C++14 compiler.
+No extra dependencies!
+
+To compile using the Makefile, you also need `make`.
+
+`thor` itself does not depend on [lua](http://www.lua.org), but the
+compiled generators that it produces do. Any version is fine, but `5.3`
+is recommended.
+	
 ## Compiling Thor
 
-Thor is written in a single `.cpp` file, inside the `src` folder.
-It requires C++14. To compile thor, just feed the cpp file to
-your C++14 compiler of choice.
+### The easy way
+
+Open the `SETTINGS` file to define your platform and installation path.
+
+Then, run `make`.
+
+### The "other" way
+
+`thor`'s source is just a single `.cpp` file.
+You can just feed `src/main.cpp` to your C++14 compiler of choice.
 
 Example:
 
     g++ src/main.cpp -O2 -o build/thor
 
-## Caveats
-
-Thor is meant to be as generic as possible. But, for now, it spits
-out the compiled template as a [lua](http://www.lua.org) script.
-
-## Using the examples
+## Running the examples
 
 You can simply pipe the examples through thor, then through lua.
 The generated code should be ready to compile:
 
-Example (Windows)
+Example:
 
-    type examples\example01.cppt | thor | lua | g++ -c -o person.o -xc++ -
-	
-Example (*nix)
+    cd examples/require
+    cat main.cppt | thor | lua -l library | g++ -c -o exec -xc++ -
 
-    cat examples/example01.cppt | thor | lua | g++ -c -o person.o -xc++ -

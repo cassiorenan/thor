@@ -1,7 +1,8 @@
+<%--- test %>
 #ifndef <%=header_guard%>
 #define <%=header_guard%>
 
-#include <utility> // for std::move
+#include <algorithm> // for std::move
 
 <%processDependencies(class.attributes)%>
 
@@ -17,7 +18,7 @@ class <%= class.name %> {
 public:
     <%for name,field in pairs(class.attributes) do%>
     <%=field.type%> get_<%=name%>() const {return <%= name%>;}
-    void set_<%=name%>(<%= field.type%> value) {this-><%= name%> = std::move(value);}
+    void set_<%=name%>(<%= field.type%> <%=name%>) {this-><%= name%> = std::move(<%=name%>);}
     <%end%>
 };
 

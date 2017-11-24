@@ -1,0 +1,92 @@
+io.write([====[
+]====])
+--- test 
+io.write([====[
+
+#ifndef ]====])
+io.write(tostring(header_guard))
+io.write([====[
+
+#define ]====])
+io.write(tostring(header_guard))
+io.write([====[
+
+
+#include <algorithm> // for std::move
+
+]====])
+processDependencies(class.attributes)
+io.write([====[
+
+
+// Generated dependencies
+]====])
+for dependency in pairs(stdlib_dependencies) do
+io.write([====[
+
+#include <]====])
+io.write(tostring(dependency))
+io.write([====[
+>
+]====])
+end
+io.write([====[
+
+
+class ]====])
+io.write(tostring(class.name ))
+io.write([====[
+ {
+    ]====])
+for name,field in pairs(class.attributes) do
+io.write([====[
+
+    ]====])
+io.write(tostring(field.type ))
+io.write([====[
+ ]====])
+io.write(tostring(name ))
+io.write([====[
+;
+    ]====])
+end
+io.write([====[
+
+public:
+    ]====])
+for name,field in pairs(class.attributes) do
+io.write([====[
+
+    ]====])
+io.write(tostring(field.type))
+io.write([====[
+ get_]====])
+io.write(tostring(name))
+io.write([====[
+() const {return ]====])
+io.write(tostring(name))
+io.write([====[
+;}
+    void set_]====])
+io.write(tostring(name))
+io.write([====[
+(]====])
+io.write(tostring(field.type))
+io.write([====[
+ ]====])
+io.write(tostring(name))
+io.write([====[
+) {this->]====])
+io.write(tostring(name))
+io.write([====[
+ = std::move(]====])
+io.write(tostring(name))
+io.write([====[
+);}
+    ]====])
+end
+io.write([====[
+
+};
+
+#endif]====])
