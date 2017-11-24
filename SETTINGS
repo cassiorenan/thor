@@ -5,6 +5,8 @@ CXX_FLAGS = -fno-rtti -O2 -Wall -std=c++14
 # Possible values are linux, windows, solaris, apple
 # Currently, only the "windows" value has any effect on the making process.
 # Any other value (Even if not on this list) will "just work".
-PLATFORM = windows
+PLATFORM = 
 
-INSTALL_PATH = C:\bin\cmd
+# The installation path. This will be passed as-is to a script: If any
+# escaping is needed, you may add it.
+INSTALL_PATH = 

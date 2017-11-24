@@ -42,11 +42,6 @@ void copy_while(T1& it, const T1& end_it, T2& out, F predicate) {
 	}
 }
 
-template<typename T>
-void ignore(T& it, const T& end, const typename T::value_type& value) {
-	for(;*it == value && it != end;++it);
-}
-
 template<mode M>
 mode read(input_iterator& it, const input_iterator& end, output_iterator& out) {
 	while (it != end_it) {
@@ -84,9 +79,8 @@ mode read<mode::plain>(input_iterator& it, const input_iterator& end, output_ite
 }
 
 template<mode M, typename IN, typename OUT>
-mode write_mode(IN& begin, const IN& end, OUT& out, char trim) {
+mode write_mode(IN& begin, const IN& end, OUT& out) {
 	copy(boilerplate<M>.prefix.begin(), boilerplate<M>.prefix.end(), out);
-	ignore(begin, end, trim);
 	mode next_mode = read<M>(begin, end, out);
 	copy(boilerplate<M>.suffix.begin(), boilerplate<M>.suffix.end(), out);
 	return next_mode;
@@ -99,13 +93,13 @@ void compile(IN& it, const IN& end, OUT& out) {
 	while(it != end) {
         switch(current_mode) {
         case mode::plain:
-		    current_mode = write_mode<mode::plain>(it, end, out, 0);
+		    current_mode = write_mode<mode::plain>(it, end, out);
             break;
         case mode::code:
-		    current_mode = write_mode<mode::code>(it, end, out, 0);
+		    current_mode = write_mode<mode::code>(it, end, out);
             break;
         case mode::getter:
-		    current_mode = write_mode<mode::getter>(it, end, out, ' ');
+		    current_mode = write_mode<mode::getter>(it, end, out);
             break;
         default:
             throw std::domain_error("Invalid mode.");
